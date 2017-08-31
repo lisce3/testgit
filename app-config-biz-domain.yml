@@ -1,0 +1,96 @@
+# biz-web : app-config-biz-domain.yml
+airdo:
+  biz:
+    domain:
+      file:
+        manual:
+          # マニュアルファイルパス
+          path: ${apBizDataRootDir}/manual/
+        claim:
+          # 請求書ファイルパス
+          path: ${apBizBillRootDir}/bill/
+          # 請求書マージファイルテンポラリーパス(BOF用)
+          bofTempPath: ${apBizTemporaryRootDir}/billtemp/
+          # 請求書マージファイルテンポラリーパス(FRONT用)
+          frontTempPath: ${apBizTemporaryRootDir}/billtemp/
+        ikatu:
+          # 一括登録CSVファイルパス
+          path: ${apBizTemporaryRootDir}/ikatu/
+          # 一括登録の読込件数上限
+          maxCount: 1000
+        if:
+          # IF（ZZL020BIZ、ZZL030BIZ、ZZL040BIZ）の一時CSVファイル保持パス
+          path: ${apBizTemporaryRootDir}/if/
+      mail:
+        claim:
+          # 請求内容確定通知メールタイトル
+          claimMailHead: 【AIRDO Biz】ご利用金額の確定につきまして(claimYm） 
+          # 請求内容確定通知メール本文
+          claimMailContent: |
+            billingName　billingCharge様
+
+            平素よりAIRDOをご利用いただきまして誠にありがとうございます。
+            インターネット法人システム「AIRDO Biz」のbillingMouth月分のご利用金額が確定いたし
+            ました。
+
+            大変お手数ではございますが、システム管理者用画面より電子請求書をダウン
+            ロード頂けますと幸いに存じます。
+
+            AIRDO Biz
+            bizUrl
+
+            今後とも、北海道の翼AIRDOをご愛顧いただきますよう宜しくお願いいたします。
+
+            ------------------------------------------------------------------------
+            ◆このメールは送信専用でございます。ご返信いただきましても対応いたしか
+            ねますのであらかじめご了承ください。
+            お問い合わせは、弊社営業担当、または AIRDO Biz サポートデスクまでお願い
+            いたします。
+            ------------------------------------------------------------------------
+            株式会社AIRDO　adoContactInfoName
+            adoAddress
+            adoPhoneNumber
+          claimMailCorpUrl:
+           https://www.airdo.jp/ap/biz/bzf/atn010/atn010bzfs010
+          claimMailStoreUrl:
+           https://www.airdo.jp/ap/biz/bzf/atn010/atn010bzfs020
+        accsys:
+          nyu:
+            # 入金情報取込バッチ:メール件名
+            head: "[AIRDO Biz]入金取消発生（未消込）通知_"
+            # 入金情報取込バッチ:メールお知らせ
+            oshirase: "AIRDO Bizシステムからの通知です。\\r\\n\\r\\n"
+            # 入金情報取込バッチ:メール本文概要
+            gaiyou: "の入金取込結果、以下の入金取消が発生し、入金が取り消されていない可能性があります。\\r\\n内容をご確認ください。\\r\\n\\r\\n"
+            # 入金情報取込バッチ:メール本文分割線
+            line: "---------------------------------------------------------------------------------------\\r\\n"
+            # 入金情報取込バッチ:メール本文ヘッダ
+            contentHead: "No    取消日                取消金額      振込先口座番号           振込依頼人名\\r\\n      会計システムコード  会計システム連携用取引先名称\\r\\n      請求担当者\\r\\n"
+            # 入金情報取込バッチ:メール本文情報
+            contentInfo: "No     Day  Kingaku  AccountNumber         AccountName\\r\\n      AccSysCode       AccSysName\\r\\n      ClaimTantouName\\r\\n"
+          match:
+            # 自動消込バッチ:メール件名
+            head: "[AIRDO Biz]自動消込結果通知_"
+            # 自動消込バッチ:メールお知らせ
+            oshirase: "AIRDO Bizシステムからの通知です。\\r\\n\\r\\n"
+            # 自動消込バッチ:メール本文概要
+            gaiyou: "の自動消込結果、以下の入金実績情報がアンマッチとなりました。\\r\\n内容をご確認ください。\\r\\n\\r\\n"
+            # 自動消込バッチ:メール本文分割線
+            line: "---------------------------------------------------------------------------------------\\r\\n"
+            # 自動消込バッチ:メール本文ヘッダ
+            contentHead: "No    入金日                入金額          振込先口座番号           振込依頼人名\\r\\n      会計システムコード  会計システム連携用取引先名称\\r\\n      請求担当者\\r\\n"
+            # 自動消込バッチ:メール本文情報
+            contentInfo: "No     Day  Kingaku  AccountNumber         AccountName\\r\\n      AccSysCode       AccSysName\\r\\n      ClaimTantouName\\r\\n"
+          deposit:
+            # 振込期日超過情報メール送信バッチ:メール件名
+            head: "[AIRDO Biz]振込期日超過情報通知_"
+            # 振込期日超過情報メール送信バッチ:メールお知らせ
+            oshirase: "AIRDO Bizシステムからの通知です。\\r\\n\\r\\n"
+            # 振込期日超過情報メール送信バッチ:メール本文概要
+            gaiyou: "時点で以下の入金予定情報が振込期日を経過しています。\\r\\n内容をご確認ください。\\r\\n\\r\\n"
+            # 振込期日超過情報メール送信バッチ:メール本文分割線
+            line: "---------------------------------------------------------------------------------------\\r\\n"
+            # 振込期日超過情報メール送信バッチ:メール本文ヘッダ
+            contentHead: "No    入金予定日        入金予定額   振込先口座番号           会計システムコード    会計システム連携用取引先名称\\r\\n      請求担当者\\r\\n"
+            # 振込期日超過情報メール送信バッチ:メール本文情報
+            contentInfo: "No     Day   Kingaku     AccountNumber           AccSysCode            AccSysName\\r\\n      ClaimTantouName\\r\\n"
