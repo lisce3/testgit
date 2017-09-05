@@ -4,6 +4,3 @@ path: /ags_share/apl/bizmanual/
 path: ${apBizTemporaryRootDir}/ikatu/
 edit1
 edit2
-commit1
-commit2
-commit3
